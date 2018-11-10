@@ -1,8 +1,8 @@
 class ResultsRepository
   
-  def initialize(competition_id)
-    competition_repository = CompetitionRepository.new
-    @competition = competition_repository.get_by_id(competition_id)
+  def initialize(params)
+    competitions_repository = CompetitionsRepository.new(params[:discipline_slug])
+    @competition = competitions_repository.get_by_id(params[:competition_id])
   end
 
   def create(params)
@@ -13,5 +13,4 @@ class ResultsRepository
     result.save!
     result
   end
-
 end

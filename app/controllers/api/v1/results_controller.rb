@@ -15,14 +15,13 @@ module Api
 
       private
         def result_params
-          params.permit(:name,:result,:competition_id)
+          params.permit(:name,:result,:competition_id,:discipline_slug)
         end
 
         def set_results_repository
           #NAO CURTI MUITO ISSO
           begin
-            byebug
-            @results_repository = ResultsRepository.new(params[:competition_id])
+            @results_repository = ResultsRepository.new(result_params)
           rescue ActiveRecord::RecordNotFound => not_found
             render json: {"error": not_found}, status: :not_found
           end
