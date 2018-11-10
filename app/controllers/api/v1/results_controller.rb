@@ -1,32 +1,57 @@
 module Api
   module V1
-    class ResultsController < ApplicationController
-      before_action :set_result_interface
-
-      # GET /api/v1/disciplines/:discipline_slug/competitions/:competition_slug
-      # GET /api/v1/disciplines/one_hundred_metre_dash/competitions/rio_semifinals
-      def index
-        render json: @result_interface.results
-      end
-
-      # POST /api/v1/disciplines/:discipline_slug/competitions/:competition_slug
-      # POST /api/v1/disciplines/one_hundred_metre_dash/competitions/rio_semifinals
+    class ResultsController < ApiController
+      before_action :set_competition_repository
+      
       def create
-        if @result_interface.save(result_params)
-          render json: @result_interface, status: :created
+        begin
+          result = @result_repository.create(result_params)
+        rescue ActiveRecord::RecordInvalid => invalid
+          render json: {"error": invalid.record.errors}, status: :unprocessable_entity
         else
-          render json: @result_interface.errors, status: :unprocessable_entity
+          render json: result, status: :created
         end
       end
 
       private
         def result_params
-          params.permit(:name,:result)
+          params.permit(:name,:result,:competition_id)
         end
 
-        def set_result_interface
-          @result_interface = ResultInterface.new(params)
+        def set_competition_repository
+          #NAO CURTI MUITO ISSO
+          begin
+            @result_repository = ResultRepository.new(params[:competition_id])
+          rescue ActiveRecord::RecordNotFound => not_found
+            render json: {"error": not_found}, status: :not_found
+          end
         end
+      # before_action :set_result_interface
+
+      # # GET /api/v1/disciplines/:discipline_slug/competitions/:competition_slug
+      # # GET /api/v1/disciplines/one_hundred_metre_dash/competitions/rio_semifinals
+      # def index
+      #   render json: @result_interface.results
+      # end
+
+      # # POST /api/v1/disciplines/:discipline_slug/competitions/:competition_slug
+      # # POST /api/v1/disciplines/one_hundred_metre_dash/competitions/rio_semifinals
+      # def create
+      #   if @result_interface.save(result_params)
+      #     render json: @result_interface, status: :created
+      #   else
+      #     render json: @result_interface.errors, status: :unprocessable_entity
+      #   end
+      # end
+
+      # private
+      #   def result_params
+      #     params.permit(:name,:result)
+      #   end
+
+      #   def set_result_interface
+      #     @result_interface = ResultInterface.new(params)
+      #   end
     end
   end
 end
