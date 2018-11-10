@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       post '/disciplines/:discipline_slug/competitions', to: 'competitions#create'
       get '/disciplines/:discipline_slug/competitions/:id', to: 'competitions#show'
       post '/disciplines/:discipline_slug/competitions/:id/finish', to: 'competitions#finish'
+      post '/disciplines/:discipline_slug/competitions/:competition_id/result', to: 'result#create'
       # resources :disciplines, only: [:index], param: :slug do
       #   resources :competitions, param: :slug do
       #       resources :results
