@@ -1,16 +1,16 @@
 module Api
   module V1
     class DisciplinesController < ApiController
-      before_action :set_discipline_repository
+      before_action :set_disciplines_repository
 
       # GET /api/v1/disciplines
       def index
-        render json: @discipline_repository.list_ordered_by_desc, except: [:created_at, :updated_at]
+        render json: @disciplines_repository.list_ordered_by_desc, except: [:created_at, :updated_at]
       end
 
       private
-        def set_discipline_repository
-          @discipline_repository = DisciplineRepository.new
+        def set_disciplines_repository
+          @disciplines_repository = DisciplinesRepository.new
         end
     end
   end

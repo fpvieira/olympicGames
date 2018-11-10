@@ -1,15 +1,15 @@
 module Api
   module V1
     class CompetitionsController < ApiController
-      before_action :set_competition_repository
+      before_action :set_competitions_repository
 
       def index
-        render json: @competition_repository.list_ordered_by_desc
+        render json: @competitions_repository.list_ordered_by_desc
       end
 
       def create
         begin
-          competition = @competition_repository.create(competition_params)
+          competition = @competitions_repository.create(competition_params)
         rescue ActiveRecord::RecordInvalid => invalid
           render json: {"error": invalid.record.errors}, status: :unprocessable_entity
         else
@@ -19,7 +19,7 @@ module Api
 
       def show
         begin
-          competition = @competition_repository.get_by_id(params[:id])
+          competition = @competitions_repository.get_by_id(params[:id])
         rescue ActiveRecord::RecordNotFound => not_found
           render json: {"error": not_found}, status: :not_found
         else
@@ -29,7 +29,7 @@ module Api
 
       def finish
         begin
-          competition = @competition_repository.finish(params[:id])
+          competition = @competitions_repository.finish(params[:id])
         rescue ActiveRecord::RecordNotFound => not_found
           render json: {"error": not_found}, status: :not_found
         else
@@ -42,10 +42,10 @@ module Api
           params.permit(:name,:discipline_slug)
         end
 
-        def set_competition_repository
+        def set_competitions_repository
           #NAO CURTI MUITO ISSO
           begin
-            @competition_repository = CompetitionRepository.new(params[:discipline_slug])
+            @competitions_repository = CompetitionsRepository.new(params[:discipline_slug])
           rescue ActiveRecord::RecordNotFound => not_found
             render json: {"error": not_found}, status: :not_found
           end

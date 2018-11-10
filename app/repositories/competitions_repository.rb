@@ -1,5 +1,5 @@
-class CompetitionRepository
-  
+class CompetitionsRepository
+
   def initialize(discipline_slug)
     discipline_repository = DisciplineRepository.new
     @discipline = discipline_repository.find_by_slug(discipline_slug)

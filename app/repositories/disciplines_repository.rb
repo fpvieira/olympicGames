@@ -1,4 +1,4 @@
-class DisciplineRepository
+class DisciplinesRepository
   
   def list_ordered_by_desc
     Discipline.order('created_at DESC');

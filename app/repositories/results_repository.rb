@@ -1,4 +1,4 @@
-class ResultRepository
+class ResultsRepository
   
   def initialize(competition_id)
     competition_repository = CompetitionRepository.new

@@ -1,11 +1,11 @@
 module Api
   module V1
     class ResultsController < ApiController
-      before_action :set_competition_repository
+      before_action :set_results_repository
       
       def create
         begin
-          result = @result_repository.create(result_params)
+          result = @results_repository.create(result_params)
         rescue ActiveRecord::RecordInvalid => invalid
           render json: {"error": invalid.record.errors}, status: :unprocessable_entity
         else
@@ -18,10 +18,11 @@ module Api
           params.permit(:name,:result,:competition_id)
         end
 
-        def set_competition_repository
+        def set_results_repository
           #NAO CURTI MUITO ISSO
           begin
-            @result_repository = ResultRepository.new(params[:competition_id])
+            byebug
+            @results_repository = ResultsRepository.new(params[:competition_id])
           rescue ActiveRecord::RecordNotFound => not_found
             render json: {"error": not_found}, status: :not_found
           end
