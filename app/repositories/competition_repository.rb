@@ -1,5 +1,4 @@
 class CompetitionRepository
-  include ActiveModel::Validations
   
   def initialize(discipline_slug)
     discipline_repository = DisciplineRepository.new
