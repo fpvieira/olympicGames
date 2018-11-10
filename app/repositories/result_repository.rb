@@ -1,6 +1,6 @@
 class ResultRepository
   
-  def initialize(discipline_slug)
+  def initialize(competition_id)
     competition_repository = CompetitionRepository.new
     @competition = competition_repository.get_by_id(competition_id)
   end
