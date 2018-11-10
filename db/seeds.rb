@@ -5,3 +5,5 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Discipline.create(name: 'One Hundred Metre Dash', slug: 'one-hundred-metre-dash', rule_type: 'ShorterTimeRule')
+Discipline.create(name: 'Javelin Throw', slug: 'javelin-throw', rule_type: 'LongestThrownOnThreeAttemptsRule')
