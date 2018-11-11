@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get '/disciplines/:discipline_slug/competitions/:id', to: 'competitions#show'
       post '/disciplines/:discipline_slug/competitions/:id/finish', to: 'competitions#finish'
       post '/disciplines/:discipline_slug/competitions/:competition_id/result', to: 'results#create'
+      get '/disciplines/:discipline_slug/competitions/:competition_id/result', to: 'results#index'
       # resources :disciplines, only: [:index], param: :slug do
       #   resources :competitions, param: :slug do
       #       resources :results
@@ -18,6 +19,8 @@ Rails.application.routes.draw do
     end
   end
 end
+
+#http://localhost:3000/api/v1/disciplines/javelin-throw/competitions/3/finish
 
 # /disciplines/:discipline_slug/competitions/:competition_id/result
 # http://localhost:3000/api/v1/disciplines/javelin-throw/competitions/1/result

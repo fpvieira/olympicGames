@@ -9,6 +9,10 @@ class ResultsRepository
     Result.find()
   end
 
+  def get(params)
+    Result.where(competition_id: params[:competition_id])
+  end
+
   def has_result(params)
     Result.exists?(name: params[:name],competition_id: params[:competition_id])
   end

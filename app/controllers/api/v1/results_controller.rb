@@ -21,6 +21,14 @@ module Api
         end
       end
 
+      def index
+        competitions_repository = CompetitionsRepository.new(params[:discipline_slug])
+        competition = competitions_repository.get_by_id(params[:competition_id])
+        get_result = GetResult.new(competition)
+        result = get_result.execute(result_params)
+        render json: result, status: :ok
+      end
+
       private
         def result_params
           params.permit(:name,:result,:competition_id,:discipline_slug)
