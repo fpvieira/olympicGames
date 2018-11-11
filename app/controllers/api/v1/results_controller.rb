@@ -5,9 +5,17 @@ module Api
       
       def create
         begin
-          result = @results_repository.create(result_params)
+          #monto o repository de cometição a partir da disciplina
+          competitions_repository = CompetitionsRepository.new(params[:discipline_slug])
+          competition = competitions_repository.get_by_id(params[:competition_id])
+          cumpute_result = ComputeResult.new(competition)
+          result = cumpute_result.compute(result_params)
         rescue ActiveRecord::RecordInvalid => invalid
           render json: {"error": invalid.record.errors}, status: :unprocessable_entity
+        rescue CompetitionClosedError => competition_close
+          render json: {"error": competition_close.message}, status: :service_unavailable
+        rescue AlreadyResultError => already_result
+          render json: {"error": already_result.message}, status: :conflict
         else
           render json: result, status: :created
         end
