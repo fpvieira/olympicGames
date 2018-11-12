@@ -3,10 +3,6 @@ module Api
     class CompetitionsController < ApiController
       before_action :set_competitions_repository
 
-      def index
-        render json: @competitions_repository.list_ordered_by_desc
-      end
-
       def create
         begin
           competition = @competitions_repository.create(competition_params)
@@ -14,16 +10,6 @@ module Api
           render json: {"error": invalid.record.errors}, status: :unprocessable_entity
         else
           render json: competition, status: :created
-        end
-      end
-
-      def show
-        begin
-          competition = @competitions_repository.get_by_id(params[:id])
-        rescue ActiveRecord::RecordNotFound => not_found
-          render json: {"error": not_found}, status: :not_found
-        else
-          render json: competition, status: :ok
         end
       end
 
@@ -43,7 +29,6 @@ module Api
         end
 
         def set_competitions_repository
-          #NAO CURTI MUITO ISSO
           begin
             @competitions_repository = CompetitionsRepository.new(params[:discipline_slug])
           rescue ActiveRecord::RecordNotFound => not_found
