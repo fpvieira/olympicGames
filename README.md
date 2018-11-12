@@ -12,21 +12,9 @@ rails s
 
 EndPoints.
 
-GET => http://localhost:3000/api/v1/disciplines/
+Para listar modalidades:
 
-Lista todas as modalidades(disciplines) disponíveis, como foram solicitada apenas duas foram inseridas à partir do db:seed.
-
-O campo rule_type representa o modo como o resultado de um atleta poderá ser computado e como são rankeados.
-
-LongestThrownOnThreeAttemptsRule
-	Todas as modalidades (disciplines) regidas por está regra, tem como características:
-	=> Permite até 3 tentativas por atleta.
-	=> Vence aquele que conseguir o maior número.
-
-ShorterTimeOnOneAttemptsRule
-	Todas as modalidades (disciplines) regidas por está regra, tem como características:
-	=> Permite uma tentativa por atleta.
-	=> Vence aquele que conseguir o menor número.
+	GET => http://localhost:3000/api/v1/disciplines/
 
 	Resultado Esperado:
 		[
@@ -43,6 +31,22 @@ ShorterTimeOnOneAttemptsRule
 			    "rule_type": ShorterTimeOnOneAttemptsRule,
 			},
 		]
+
+Lista todas as modalidades(disciplines) disponíveis, como foram solicitada apenas duas foram inseridas à partir do db:seed.
+
+O campo rule_type representa o modo como o resultado de um atleta poderá ser computado e como são rankeados.
+
+LongestThrownOnThreeAttemptsRule
+
+	Todas as modalidades (disciplines) regidas por está regra, tem como características:
+	=> Permite até 3 tentativas por atleta.
+	=> Vence aquele que conseguir o maior número.
+
+ShorterTimeOnOneAttemptsRule
+
+	Todas as modalidades (disciplines) regidas por está regra, tem como características:
+	=> Permite uma tentativa por atleta.
+	=> Vence aquele que conseguir o menor número.
 
 Para cadastrar uma competição:
 
