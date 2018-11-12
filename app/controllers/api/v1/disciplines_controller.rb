@@ -3,7 +3,6 @@ module Api
     class DisciplinesController < ApiController
       before_action :set_disciplines_repository
 
-      # GET /api/v1/disciplines
       def index
         render json: @disciplines_repository.list_ordered_by_desc, except: [:created_at, :updated_at]
       end

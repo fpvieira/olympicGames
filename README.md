@@ -145,6 +145,11 @@ Para encerrar uma competição
 		    "updated_at": "2018-11-11T19:41:55.860Z"
 		}
 
+TODO
+	Ampiliar cobertura de testes
+	Refatorar inicialização e utilização dos repositories
+	Refatorar classes Rules
+	Implementar métodos de autenticação.
 
 
 
