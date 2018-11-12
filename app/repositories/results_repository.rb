@@ -6,7 +6,7 @@ class ResultsRepository
   end
 
   def find_by_name_and_competition(params)
-    Result.find()
+    Result.where(name: params[:name],competition_id: params[:competition_id])
   end
 
   def get(params)
