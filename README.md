@@ -148,7 +148,7 @@ Para encerrar uma competição
 TODO
 
 	Atualizar o factory_girl para factory_bot
-	Ampiliar cobertura de testes
+	Ampliar cobertura de testes
 	Refatorar inicialização e utilização dos repositories
 	Refatorar classes Rules
 	Implementar métodos de autenticação.
