@@ -4,11 +4,11 @@ Tem como objetivo computar resultados e retornar os vencedores de uma determinad
 
 Para utilizar o projeto.
 
-bundle install
-rails db:migrate
-rails db:seed
-bundle exec rspec spec
-rails s
+	bundle install
+	rails db:migrate
+	rails db:seed
+	bundle exec rspec spec
+	rails s
 
 EndPoints.
 
